@@ -77,7 +77,7 @@ export function MarketplaceFooter() {
         </div>
 
         <div className="mt-10 border-t border-border/60 pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Inovasi Online. Seluruh hak cipta dilindungi.
+          {new Date().getFullYear()} © Inovasi Online. All Rights Reserved.
         </div>
       </div>
     </footer>

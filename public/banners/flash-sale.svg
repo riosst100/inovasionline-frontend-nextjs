@@ -1,0 +1,37 @@
+<svg width="1200" height="480" viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="55%" stop-color="#4338ca"/>
+      <stop offset="100%" stop-color="#7e22ce"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="80%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="480" fill="url(#bg1)"/>
+  <rect width="1200" height="480" fill="url(#glow1)"/>
+
+  <g opacity="0.9">
+    <circle cx="990" cy="150" r="80" fill="#fbbf24"/>
+    <circle cx="990" cy="150" r="80" fill="#f59e0b" opacity="0.4"/>
+    <text x="990" y="140" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#78350f" text-anchor="middle">70%</text>
+    <text x="990" y="178" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#78350f" text-anchor="middle">OFF</text>
+  </g>
+
+  <g opacity="0.85" transform="translate(120,190)">
+    <rect x="0" y="60" width="150" height="110" rx="8" fill="#ffffff" opacity="0.12"/>
+    <rect x="20" y="30" width="110" height="35" rx="6" fill="#ffffff" opacity="0.18"/>
+    <circle cx="35" cy="185" r="14" fill="#ffffff" opacity="0.2"/>
+    <circle cx="115" cy="185" r="14" fill="#ffffff" opacity="0.2"/>
+  </g>
+
+  <g opacity="0.5">
+    <circle cx="150" cy="80" r="6" fill="#fde047"/>
+    <circle cx="220" cy="60" r="4" fill="#ffffff"/>
+    <circle cx="1100" cy="380" r="8" fill="#fde047"/>
+    <circle cx="1150" cy="300" r="5" fill="#ffffff"/>
+    <circle cx="700" cy="50" r="5" fill="#ffffff"/>
+  </g>
+</svg>

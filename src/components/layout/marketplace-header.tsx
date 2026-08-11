@@ -98,7 +98,7 @@ export function MarketplaceHeader() {
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-72">
+          <SheetContent side="right" className="w-80 gap-0 p-0">
             <SheetTitle className="sr-only">Menu Navigasi</SheetTitle>
             <MobileMenu
               user={user ?? null}
@@ -236,78 +236,84 @@ function MobileMenu({
   ];
 
   return (
-    <div className="mt-8 flex flex-col gap-1">
-      {user && (
-        <div className="mb-4 flex items-center gap-3 rounded-xl bg-surface p-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={user.avatar_url ?? undefined} alt={user.name} />
-            <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-              {user.name.slice(0, 2).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="text-sm font-semibold">{user.name}</p>
-            <Link href="/account" className="text-xs text-muted-foreground" onClick={onNavigate}>
-              Lihat profil
-            </Link>
+    <div className="flex h-full flex-col">
+      <div className="flex-1 overflow-y-auto px-5 pt-14 pb-4">
+        {user && (
+          <div className="mb-5 flex items-center gap-3 rounded-xl bg-surface p-3">
+            <Avatar className="h-10 w-10">
+              <AvatarImage src={user.avatar_url ?? undefined} alt={user.name} />
+              <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                {user.name.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-semibold">{user.name}</p>
+              <Link href="/account" className="text-xs text-muted-foreground" onClick={onNavigate}>
+                Lihat profil
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          onClick={onNavigate}
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-surface"
-        >
-          <link.icon className="h-4 w-4 text-muted-foreground" />
-          {link.label}
-        </Link>
-      ))}
+        <nav className="flex flex-col gap-0.5">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onNavigate}
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-surface"
+            >
+              <link.icon className="h-4 w-4 text-muted-foreground" />
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
 
-      <div className="my-3 h-px bg-border" />
-
-      {user ? (
-        <>
-          {user.is_seller ? (
-            <Button asChild className="mb-2 bg-gradient-to-r from-primary to-secondary text-primary-foreground">
-              <Link href="/seller/dashboard" onClick={onNavigate}>
-                <Sparkles className="h-4 w-4" />
-                Seller Center
+      <div className="border-t border-border/60 px-5 py-4">
+        {user ? (
+          <div className="flex flex-col gap-2">
+            {user.is_seller ? (
+              <Button asChild className="bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-md shadow-primary/30 hover:opacity-90">
+                <Link href="/seller/dashboard" onClick={onNavigate}>
+                  <Sparkles className="h-4 w-4" />
+                  Seller Center
+                </Link>
+              </Button>
+            ) : (
+              <Button asChild className="bg-gradient-to-r from-accent to-accent/80 text-accent-foreground shadow-md shadow-accent/30 hover:opacity-90">
+                <Link href="/become-a-seller" onClick={onNavigate}>
+                  <Store className="h-4 w-4" />
+                  Jadi Seller
+                </Link>
+              </Button>
+            )}
+            <Button variant="ghost" className="justify-start text-destructive hover:bg-destructive/10" onClick={onLogout}>
+              <LogOut className="h-4 w-4" />
+              Keluar
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-2">
+            <Button variant="outline" asChild>
+              <Link href="/login" onClick={onNavigate}>
+                Masuk
               </Link>
             </Button>
-          ) : (
-            <Button variant="outline" asChild className="mb-2">
+            <Button asChild>
+              <Link href="/register" onClick={onNavigate}>
+                Daftar
+              </Link>
+            </Button>
+            <Button asChild className="bg-gradient-to-r from-accent to-accent/80 text-accent-foreground shadow-md shadow-accent/30 hover:opacity-90">
               <Link href="/become-a-seller" onClick={onNavigate}>
+                <Store className="h-4 w-4" />
                 Jadi Seller
               </Link>
             </Button>
-          )}
-          <Button variant="ghost" className="justify-start text-destructive" onClick={onLogout}>
-            <LogOut className="h-4 w-4" />
-            Keluar
-          </Button>
-        </>
-      ) : (
-        <div className="flex flex-col gap-2">
-          <Button variant="outline" asChild>
-            <Link href="/login" onClick={onNavigate}>
-              Masuk
-            </Link>
-          </Button>
-          <Button asChild>
-            <Link href="/register" onClick={onNavigate}>
-              Daftar
-            </Link>
-          </Button>
-          <Button asChild className="bg-gradient-to-r from-accent to-accent/80 text-accent-foreground">
-            <Link href="/become-a-seller" onClick={onNavigate}>
-              Jadi Seller
-            </Link>
-          </Button>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

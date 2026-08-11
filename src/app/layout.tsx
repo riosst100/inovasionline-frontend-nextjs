@@ -38,7 +38,7 @@ export default function RootLayout({
         <QueryProvider>
           <TooltipProvider>
             {children}
-            <Toaster richColors position="top-center" />
+            <Toaster richColors position="bottom-center" mobileOffset={{ bottom: "72px" }} />
           </TooltipProvider>
         </QueryProvider>
       </body>

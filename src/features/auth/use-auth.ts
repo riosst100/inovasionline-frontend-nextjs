@@ -2,6 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { authService } from "@/services/auth.service";
 import { ApiError } from "@/types/api";
 import type { LoginPayload, RegisterPayload } from "@/types/auth";
@@ -48,7 +49,13 @@ export function useLogout() {
     mutationFn: authService.logout,
     onSuccess: () => {
       queryClient.setQueryData(AUTH_QUERY_KEY, null);
+      toast.success("Anda telah keluar.");
       router.push("/");
+      router.refresh();
+    },
+    onError: (error) => {
+      const message = error instanceof ApiError ? error.message : "Gagal keluar. Silakan coba lagi.";
+      toast.error(message);
     },
   });
 }

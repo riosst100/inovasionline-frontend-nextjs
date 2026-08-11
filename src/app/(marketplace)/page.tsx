@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Search, Sparkles, Store as StoreIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PromoBannerSlider } from "@/features/home/promo-banner-slider";
+import { FlashSaleSection } from "@/features/home/flash-sale-section";
 
 export default function HomePage() {
   return (
@@ -47,11 +49,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+        <PromoBannerSlider />
+      </section>
+
+      <FlashSaleSection />
+
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-dashed border-border bg-surface p-12 text-center">
           <p className="text-sm text-muted-foreground">
-            Promosi, kategori, produk terbaru, dan toko unggulan akan tampil di sini pada fase
-            berikutnya.
+            Kategori, produk terbaru, dan toko unggulan akan tampil di sini pada fase berikutnya.
           </p>
         </div>
       </section>
