@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PromoBannerSlider } from "@/features/home/promo-banner-slider";
 import { FlashSaleSection } from "@/features/home/flash-sale-section";
+import { BestSellerSection } from "@/features/home/best-seller-section";
 
 export default function HomePage() {
   return (
@@ -54,6 +55,8 @@ export default function HomePage() {
       </section>
 
       <FlashSaleSection />
+
+      <BestSellerSection />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-dashed border-border bg-surface p-12 text-center">

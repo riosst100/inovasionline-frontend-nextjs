@@ -85,7 +85,7 @@ export function PromoBannerSlider() {
         type="button"
         aria-label="Sebelumnya"
         onClick={() => emblaApi?.scrollPrev()}
-        className="absolute top-1/2 left-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/90 text-foreground shadow-md ring-1 ring-border hover:bg-background sm:h-9 sm:w-9"
+        className="absolute top-1/2 left-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/50 text-foreground shadow-md hover:bg-background/70 sm:h-9 sm:w-9 sm:bg-background/90 sm:shadow-md sm:ring-1 sm:ring-border sm:hover:bg-background"
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
@@ -93,7 +93,7 @@ export function PromoBannerSlider() {
         type="button"
         aria-label="Berikutnya"
         onClick={() => emblaApi?.scrollNext()}
-        className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/90 text-foreground shadow-md ring-1 ring-border hover:bg-background sm:h-9 sm:w-9"
+        className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/50 text-foreground shadow-md hover:bg-background/70 sm:h-9 sm:w-9 sm:bg-background/90 sm:shadow-md sm:ring-1 sm:ring-border sm:hover:bg-background"
       >
         <ChevronRight className="h-4 w-4" />
       </button>
