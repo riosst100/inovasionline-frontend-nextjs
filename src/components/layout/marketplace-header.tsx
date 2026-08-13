@@ -29,6 +29,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { useCurrentUser, useLogout } from "@/features/auth/use-auth";
+import { useAdminToolbarVisible } from "@/features/admin/use-admin-toolbar";
+import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { href: "/", label: "Beranda" },
@@ -41,9 +43,15 @@ export function MarketplaceHeader() {
   const { data: user, isLoading } = useCurrentUser();
   const logout = useLogout();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const adminToolbarVisible = useAdminToolbarVisible();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80",
+        adminToolbarVisible && "top-9"
+      )}
+    >
       {/* Desktop top row */}
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2">

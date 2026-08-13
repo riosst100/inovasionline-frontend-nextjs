@@ -4,6 +4,8 @@ import "./globals.css";
 import { QueryProvider } from "@/lib/query-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { AdminToolbar } from "@/components/layout/admin-toolbar";
+import { AdminToolbarOffset } from "@/components/layout/admin-toolbar-offset";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +39,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <QueryProvider>
           <TooltipProvider>
-            {children}
+            <AdminToolbar />
+            <AdminToolbarOffset>{children}</AdminToolbarOffset>
             <Toaster richColors position="bottom-center" mobileOffset={{ bottom: "72px" }} />
           </TooltipProvider>
         </QueryProvider>

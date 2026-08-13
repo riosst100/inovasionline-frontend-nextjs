@@ -27,6 +27,7 @@ export function HorizontalScrollCarousel({ children, className }: HorizontalScro
 
   useEffect(() => {
     if (!emblaApi) return;
+    onSelect();
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
     return () => {
@@ -41,12 +42,20 @@ export function HorizontalScrollCarousel({ children, className }: HorizontalScro
         <div className="flex touch-pan-y gap-3 sm:gap-4">{children}</div>
       </div>
 
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-l from-background to-transparent transition-opacity",
+          canScrollNext ? "opacity-100" : "opacity-0"
+        )}
+      />
+
       <button
         type="button"
         aria-label="Sebelumnya"
         onClick={() => emblaApi?.scrollPrev()}
         disabled={!canScrollPrev}
-        className="absolute top-1/2 left-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/90 text-foreground shadow-md ring-1 ring-border hover:bg-background disabled:pointer-events-none disabled:opacity-0 sm:h-9 sm:w-9"
+        className="absolute top-1/2 left-2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background text-foreground shadow-lg ring-1 ring-border hover:bg-surface disabled:pointer-events-none disabled:opacity-0 sm:h-9 sm:w-9"
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
@@ -55,7 +64,7 @@ export function HorizontalScrollCarousel({ children, className }: HorizontalScro
         aria-label="Berikutnya"
         onClick={() => emblaApi?.scrollNext()}
         disabled={!canScrollNext}
-        className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background/90 text-foreground shadow-md ring-1 ring-border hover:bg-background disabled:pointer-events-none disabled:opacity-0 sm:h-9 sm:w-9"
+        className="absolute top-1/2 right-2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-background text-foreground shadow-lg ring-1 ring-border hover:bg-surface disabled:pointer-events-none disabled:opacity-0 sm:h-9 sm:w-9"
       >
         <ChevronRight className="h-4 w-4" />
       </button>

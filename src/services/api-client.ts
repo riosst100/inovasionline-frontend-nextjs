@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, isAxiosError } from "axios";
 import { env } from "@/config/env";
 import { ApiError, type ApiErrorResponse, type ApiSuccessResponse } from "@/types/api";
+import type { PaginatedMeta, PaginatedResult } from "@/types/admin";
 
 function getAppOrigin(): string {
   return env.apiUrl.replace(/\/api\/v1\/?$/, "");
@@ -20,12 +21,21 @@ export const apiClient: AxiosInstance = axios.create({
   },
 });
 
-let csrfInitialized = false;
+let csrfCookiePromise: Promise<void> | null = null;
 
 async function ensureCsrfCookie(): Promise<void> {
-  if (csrfInitialized) return;
-  await axios.get(`${getAppOrigin()}/sanctum/csrf-cookie`, { withCredentials: true });
-  csrfInitialized = true;
+  if (readCookie("XSRF-TOKEN")) return;
+
+  if (!csrfCookiePromise) {
+    csrfCookiePromise = axios
+      .get(`${getAppOrigin()}/sanctum/csrf-cookie`, { withCredentials: true })
+      .then(() => undefined)
+      .finally(() => {
+        csrfCookiePromise = null;
+      });
+  }
+
+  await csrfCookiePromise;
 }
 
 apiClient.interceptors.request.use(async (config) => {
@@ -42,10 +52,16 @@ apiClient.interceptors.request.use(async (config) => {
 
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (isAxiosError<ApiErrorResponse>(error)) {
-      if (error.response?.status === 419) {
-        csrfInitialized = false;
+      if (error.response?.status === 419 && !error.config?.headers?.["X-Retried-After-419"]) {
+        await axios.get(`${getAppOrigin()}/sanctum/csrf-cookie`, { withCredentials: true });
+        const token = readCookie("XSRF-TOKEN");
+        if (token && error.config) {
+          error.config.headers.set("X-XSRF-TOKEN", token);
+          error.config.headers.set("X-Retried-After-419", "1");
+          return apiClient.request(error.config);
+        }
       }
 
       const message = error.response?.data?.message ?? error.message ?? "Something went wrong.";
@@ -60,6 +76,11 @@ apiClient.interceptors.response.use(
 export async function apiGet<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
   const { data } = await apiClient.get<ApiSuccessResponse<T>>(url, config);
   return data.data;
+}
+
+export async function apiGetPaginated<T>(url: string, config?: AxiosRequestConfig): Promise<PaginatedResult<T>> {
+  const { data } = await apiClient.get<ApiSuccessResponse<T[]>>(url, config);
+  return { data: data.data, meta: data.meta as unknown as PaginatedMeta };
 }
 
 export async function apiPost<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
