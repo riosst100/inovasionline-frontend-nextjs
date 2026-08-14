@@ -15,6 +15,7 @@ import {
   Tag,
   LogOut,
   LayoutDashboard,
+  Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -203,9 +204,15 @@ function AuthedMenu({
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/account/orders">
+            <Link href="/account">
               <Package className="h-4 w-4" />
               Pesanan Saya
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/account">
+              <Settings className="h-4 w-4" />
+              Pengaturan
             </Link>
           </DropdownMenuItem>
           {!isSeller && (

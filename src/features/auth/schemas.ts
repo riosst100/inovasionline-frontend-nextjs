@@ -34,6 +34,16 @@ export const registerSchema = z
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 
+export const updateProfileSchema = z.object({
+  name: z.string().min(1, "Nama lengkap wajib diisi").max(255),
+  phone: z
+    .string()
+    .min(1, "Nomor telepon wajib diisi")
+    .regex(/^[0-9+()\-\s]{8,20}$/, "Format nomor telepon tidak valid"),
+});
+
+export type UpdateProfileFormValues = z.infer<typeof updateProfileSchema>;
+
 export const forgotPasswordSchema = z.object({
   email: z.string().min(1, "Email wajib diisi").email("Format email tidak valid"),
 });

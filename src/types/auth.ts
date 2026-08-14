@@ -27,6 +27,11 @@ export interface LoginPayload {
   remember?: boolean;
 }
 
+export interface UpdateProfilePayload {
+  name: string;
+  phone: string;
+}
+
 export interface ForgotPasswordPayload {
   email: string;
 }

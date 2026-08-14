@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { authService } from "@/services/auth.service";
 import { ApiError } from "@/types/api";
-import type { LoginPayload, RegisterPayload } from "@/types/auth";
+import type { LoginPayload, RegisterPayload, UpdateProfilePayload } from "@/types/auth";
 
 export const AUTH_QUERY_KEY = ["auth", "user"] as const;
 
@@ -35,6 +35,17 @@ export function useRegister() {
 
   return useMutation({
     mutationFn: (payload: RegisterPayload) => authService.register(payload),
+    onSuccess: (user) => {
+      queryClient.setQueryData(AUTH_QUERY_KEY, user);
+    },
+  });
+}
+
+export function useUpdateProfile() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: UpdateProfilePayload) => authService.updateProfile(payload),
     onSuccess: (user) => {
       queryClient.setQueryData(AUTH_QUERY_KEY, user);
     },
