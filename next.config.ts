@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "http", hostname: "localhost", port: "8000", pathname: "/storage/**", search: "" },
       { protocol: "http", hostname: "localhost", port: "8001", pathname: "/storage/**", search: "" },
+      { protocol: "https", hostname: "api.inovasionline.com", pathname: "/storage/**", search: "" },
     ],
   },
 };
