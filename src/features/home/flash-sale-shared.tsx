@@ -95,10 +95,10 @@ export function FlashSaleProductGrid({ products }: { products: PublicProduct[] }
           </div>
 
           <div className="flex flex-1 flex-col gap-1.5 p-2.5">
-            <p className="line-clamp-2 text-xs font-medium text-foreground sm:text-sm">{product.name}</p>
+            <p className="line-clamp-2 text-sm font-medium text-foreground">{product.name}</p>
 
             <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-bold text-red-600 sm:text-base">
+              <span className="text-base font-bold text-red-600">
                 {formatRupiah(Number(product.sale_price ?? product.regular_price))}
               </span>
               {product.sale_price && (
@@ -109,7 +109,7 @@ export function FlashSaleProductGrid({ products }: { products: PublicProduct[] }
             </div>
 
             {product.sold_count > 0 && (
-              <p className="mt-auto text-[10px] text-muted-foreground">{product.sold_count} terjual</p>
+              <p className="mt-auto text-xs text-muted-foreground">{product.sold_count} terjual</p>
             )}
           </div>
         </Link>

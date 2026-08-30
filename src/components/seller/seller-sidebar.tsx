@@ -7,6 +7,7 @@ import {
   Package,
   ShoppingCart,
   Tag,
+  Layers,
   Wallet,
   Truck,
   Store,
@@ -29,6 +30,7 @@ import { cn } from "@/lib/utils";
 const MENU = [
   { href: "/seller/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/seller/products", label: "Produk", icon: Package },
+  { href: "/seller/categories", label: "Kategori", icon: Layers },
   { href: "/seller/orders", label: "Pesanan", icon: ShoppingCart },
   { href: "/seller/promotions", label: "Promosi", icon: Tag },
   { href: "/seller/payment-methods", label: "Metode Pembayaran", icon: Wallet },

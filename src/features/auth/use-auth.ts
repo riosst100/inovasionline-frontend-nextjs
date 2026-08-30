@@ -13,7 +13,10 @@ export function useCurrentUser() {
   return useQuery({
     queryKey: AUTH_QUERY_KEY,
     queryFn: authService.currentUser,
-    retry: false,
+    retry: (failureCount, error) => {
+      if (isUnauthenticated(error)) return false;
+      return failureCount < 1;
+    },
     staleTime: 60_000,
     throwOnError: false,
   });

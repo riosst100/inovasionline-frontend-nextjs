@@ -68,12 +68,12 @@ export function BestSellerSection() {
               </div>
 
               <div className="flex flex-1 flex-col gap-1.5 p-2.5">
-                <p className="line-clamp-2 text-xs font-medium text-foreground sm:text-sm">{product.name}</p>
+                <p className="line-clamp-2 text-sm font-medium text-foreground">{product.name}</p>
                 {product.store_name && (
                   <p className="truncate text-xs text-muted-foreground">{product.store_name}</p>
                 )}
 
-                <span className="text-sm font-bold text-foreground sm:text-base">
+                <span className="text-base font-bold text-foreground">
                   {formatRupiah(Number(product.sale_price ?? product.regular_price))}
                 </span>
 

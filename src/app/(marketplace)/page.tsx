@@ -13,7 +13,7 @@ import { SellerListSection } from "@/features/home/seller-list-section";
 export default function HomePage() {
   return (
     <div>
-      <section className="relative overflow-hidden py-20 sm:py-28">
+      <section className="relative overflow-hidden py-12 sm:py-28">
         <Image
           src="/banners/hero-food.svg"
           alt=""
@@ -24,28 +24,28 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/30" />
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5" />
+          <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm sm:mb-4 sm:px-4 sm:py-1.5 sm:text-sm">
+            <Sparkles className="h-3.5 w-3.5 shrink-0" />
             Marketplace kuliner lokal Indonesia
           </span>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="text-2xl leading-tight font-bold tracking-tight text-white sm:text-5xl">
             Temukan Kuliner Favoritmu dari Resto dan Dapur Lokal
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/85">
+          <p className="mx-auto mt-3 max-w-2xl text-base text-white/85 sm:mt-4 sm:text-lg">
             Jelajahi ribuan menu dari restoran, kafe, hingga dapur rumahan di sekitarmu — dan
             temukan produk lainnya dalam satu platform.
           </p>
 
           <GlobalSearch />
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Button size="lg" asChild>
+          <div className="mt-6 flex flex-col items-center gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-3">
+            <Button size="lg" className="w-full sm:w-auto" asChild>
               <Link href="/products">Jelajahi Kuliner</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white"
+              className="w-full gap-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white sm:w-auto"
               asChild
             >
               <Link href="/become-a-seller">
@@ -57,7 +57,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
         <LocationBar />
       </section>
 
@@ -65,9 +65,7 @@ export default function HomePage() {
         <CategoryList />
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-        <PromoBannerSlider />
-      </section>
+      <PromoBannerSlider />
 
       <FlashSaleSection />
 

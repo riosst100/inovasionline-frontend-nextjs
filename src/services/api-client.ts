@@ -83,6 +83,11 @@ export async function apiGetPaginated<T>(url: string, config?: AxiosRequestConfi
   return { data: data.data, meta: data.meta as unknown as PaginatedMeta };
 }
 
+export async function apiGetWithMeta<T>(url: string, config?: AxiosRequestConfig): Promise<{ data: T; meta: PaginatedMeta }> {
+  const { data } = await apiClient.get<ApiSuccessResponse<T>>(url, config);
+  return { data: data.data, meta: data.meta as unknown as PaginatedMeta };
+}
+
 export async function apiPost<T>(url: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
   const { data } = await apiClient.post<ApiSuccessResponse<T>>(url, body, config);
   return data.data;

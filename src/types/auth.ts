@@ -8,6 +8,7 @@ export interface User {
   role: UserRole;
   avatar_url: string | null;
   is_seller: boolean;
+  is_verified: boolean;
   email_verified_at: string | null;
   created_at: string;
 }
@@ -77,4 +78,30 @@ export interface SellerApplication {
   status: SellerApplicationStatus;
   rejection_reason: string | null;
   created_at: string;
+}
+
+export type UserVerificationStatus = "pending" | "approved" | "rejected";
+
+export interface UserVerificationPayload {
+  full_name: string;
+  id_number?: string;
+  selfie: File;
+  document: File;
+}
+
+export interface UserVerification {
+  id: string;
+  user_id: string;
+  full_name: string;
+  id_number: string | null;
+  selfie_url: string;
+  document_url: string;
+  status: UserVerificationStatus;
+  rejection_reason: string | null;
+  reviewed_at: string | null;
+  created_at: string;
+  user?: {
+    name: string;
+    email: string;
+  };
 }

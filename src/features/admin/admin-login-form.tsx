@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useIsRestoring } from "@tanstack/react-query";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,11 @@ import { ApiError } from "@/types/api";
 export function AdminLoginForm() {
   const router = useRouter();
   const login = useLogin();
+  const isRestoring = useIsRestoring();
   const { data: user, isLoading } = useCurrentUser();
+
+  const isChecking = isRestoring || isLoading;
+  const isAlreadyAdmin = user?.role === "platform_admin";
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -31,10 +36,19 @@ export function AdminLoginForm() {
   });
 
   useEffect(() => {
-    if (!isLoading && user?.role === "platform_admin") {
+    if (!isChecking && isAlreadyAdmin) {
       router.replace("/admin/dashboard");
     }
-  }, [isLoading, user, router]);
+  }, [isChecking, isAlreadyAdmin, router]);
+
+  if (isChecking || isAlreadyAdmin) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 py-10">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-sm text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
 
   function onSubmit(values: LoginFormValues) {
     login.mutate(values, {

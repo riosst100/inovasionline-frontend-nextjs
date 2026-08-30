@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid, Store, Tag, User } from "lucide-react";
+import { Home, Rss, MessageCircle, Package, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ITEMS = [
   { href: "/", label: "Beranda", icon: Home },
-  { href: "/categories", label: "Kategori", icon: LayoutGrid },
-  { href: "/stores", label: "Toko", icon: Store },
-  { href: "/promotions", label: "Promo", icon: Tag },
+  { href: "/feed", label: "Feed", icon: Rss },
+  { href: "/chat", label: "Chat", icon: MessageCircle },
+  { href: "/orders", label: "Pesanan", icon: Package },
   { href: "/account", label: "Akun", icon: User },
 ];
 

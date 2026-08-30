@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowLeft, LayoutDashboard, ShieldCheck, Store, Users, Zap } from "lucide-react";
+import { ArrowLeft, BadgeCheck, Image, LayoutDashboard, Layers, ShieldCheck, Store, Users, Zap } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,8 +19,11 @@ import { cn } from "@/lib/utils";
 const MENU = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/customers", label: "Customers", icon: Users },
-  { href: "/admin/sellers", label: "Seller Applications", icon: Store },
+  { href: "/admin/sellers", label: "Seller", icon: Store },
+  { href: "/admin/verifications", label: "Verifikasi", icon: BadgeCheck },
+  { href: "/admin/categories", label: "Kategori", icon: Layers },
   { href: "/admin/flash-sale-slots", label: "Flash Sale Slots", icon: Zap },
+  { href: "/admin/banners", label: "Banner", icon: Image },
 ];
 
 export function AdminSidebar() {

@@ -26,6 +26,11 @@ export const productService = {
     apiPost<Product>("/seller/products", toFormData(payload), {
       headers: { "Content-Type": "multipart/form-data" },
     }),
+  sellerDetail: (id: string) => apiGet<Product>(`/seller/products/${id}`),
+  update: (id: string, payload: ProductPayload) =>
+    apiPost<Product>(`/seller/products/${id}`, toFormData(payload), {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
   flashSale: (date?: string) => apiGet<FlashSaleSchedule>("/products/flash-sale", { params: date ? { date } : undefined }),
   bestSellers: (limit = 12) => apiGet<PublicProduct[]>("/products/best-sellers", { params: { limit } }),
   detail: (slug: string) => apiGet<PublicProductDetail>(`/products/${slug}`),

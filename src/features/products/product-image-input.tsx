@@ -8,9 +8,15 @@ interface ProductImageInputProps {
   value: File[];
   onChange: (files: File[]) => void;
   maxFiles?: number;
+  existingImageUrls?: string[];
 }
 
-export function ProductImageInput({ value, onChange, maxFiles = 8 }: ProductImageInputProps) {
+export function ProductImageInput({
+  value,
+  onChange,
+  maxFiles = 8,
+  existingImageUrls = [],
+}: ProductImageInputProps) {
   const previews = useMemo(() => value.map((file) => URL.createObjectURL(file)), [value]);
 
   useEffect(() => {
@@ -29,11 +35,23 @@ export function ProductImageInput({ value, onChange, maxFiles = 8 }: ProductImag
 
   return (
     <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
+      {existingImageUrls.map((url, index) => (
+        <div key={url} className="relative aspect-square overflow-hidden rounded-lg border border-border">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={url} alt={`Gambar ${index + 1}`} className="h-full w-full object-cover" />
+          {index === 0 && (
+            <span className="absolute left-1 top-1 rounded bg-primary px-1.5 py-0.5 text-[10px] font-medium text-primary-foreground">
+              Utama
+            </span>
+          )}
+        </div>
+      ))}
+
       {previews.map((url, index) => (
         <div key={url} className="group relative aspect-square overflow-hidden rounded-lg border border-border">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={url} alt={`Preview ${index + 1}`} className="h-full w-full object-cover" />
-          {index === 0 && (
+          {existingImageUrls.length === 0 && index === 0 && (
             <span className="absolute left-1 top-1 rounded bg-primary px-1.5 py-0.5 text-[10px] font-medium text-primary-foreground">
               Utama
             </span>
@@ -48,7 +66,7 @@ export function ProductImageInput({ value, onChange, maxFiles = 8 }: ProductImag
         </div>
       ))}
 
-      {value.length < maxFiles && (
+      {existingImageUrls.length + value.length < maxFiles && (
         <label
           className={cn(
             "flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-border text-muted-foreground transition-colors hover:bg-muted/50"

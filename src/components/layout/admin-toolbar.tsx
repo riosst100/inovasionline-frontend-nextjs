@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, ShieldCheck, Store, Users } from "lucide-react";
+import { BadgeCheck, LayoutDashboard, ShieldCheck, Store, Users } from "lucide-react";
 import { useAdminToolbarVisible } from "@/features/admin/use-admin-toolbar";
 
 const LINKS = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/customers", label: "Customers", icon: Users },
-  { href: "/admin/sellers", label: "Seller Applications", icon: Store },
+  { href: "/admin/sellers", label: "Seller", icon: Store },
+  { href: "/admin/verifications", label: "Verifikasi", icon: BadgeCheck },
 ];
 
 export function AdminToolbar() {

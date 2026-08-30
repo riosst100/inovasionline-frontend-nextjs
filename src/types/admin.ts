@@ -20,3 +20,14 @@ export interface AdminSellerApplicationListParams {
   page?: number;
   status?: string;
 }
+
+export interface AdminVerificationListParams {
+  page?: number;
+  status?: string;
+}
+
+export interface AdminCategoryListParams {
+  page?: number;
+  status?: string;
+  per_page?: number;
+}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
+  BadgeCheck,
   ChevronDown,
   KeyRound,
   LogOut,
@@ -84,7 +85,12 @@ function ProfileContent({ user }: { user: User }) {
             </AvatarFallback>
           </Avatar>
           <div>
-            <p className="text-base font-semibold">{user.name}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="text-base font-semibold">{user.name}</p>
+              {user.is_verified && (
+                <BadgeCheck className="h-4 w-4 shrink-0 text-primary" aria-label="Terverifikasi" />
+              )}
+            </div>
             <Badge variant="secondary" className="mt-1">
               {ROLE_LABEL[user.role] ?? user.role}
             </Badge>
@@ -100,6 +106,23 @@ function ProfileContent({ user }: { user: User }) {
             <p className="text-xs text-muted-foreground">Nama Lengkap</p>
             <p className="text-sm font-medium">{user.name}</p>
           </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <BadgeCheck className="h-4 w-4 shrink-0 text-muted-foreground" />
+            <div>
+              <p className="text-xs text-muted-foreground">Status Verifikasi</p>
+              <p className="text-sm font-medium">
+                {user.is_verified ? "Terverifikasi" : "Belum terverifikasi"}
+              </p>
+            </div>
+          </div>
+          {!user.is_verified && (
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/account/verification">Verifikasi</Link>
+            </Button>
+          )}
         </div>
 
         <div className="flex items-center gap-3">

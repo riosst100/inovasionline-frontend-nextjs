@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Package } from "lucide-react";
+import Link from "next/link";
+import { Package, Pencil } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -70,6 +72,7 @@ export function ProductList() {
             <TableHead>Harga</TableHead>
             <TableHead>Stok</TableHead>
             <TableHead>Status</TableHead>
+            <TableHead className="text-right">Aksi</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -94,6 +97,14 @@ export function ProductList() {
               <TableCell>{product.stock}</TableCell>
               <TableCell>
                 <Badge variant={STATUS_VARIANT[product.status]}>{STATUS_LABEL[product.status]}</Badge>
+              </TableCell>
+              <TableCell className="text-right">
+                <Button asChild variant="ghost" size="sm">
+                  <Link href={`/seller/products/${product.id}/edit`}>
+                    <Pencil />
+                    Edit
+                  </Link>
+                </Button>
               </TableCell>
             </TableRow>
           ))}

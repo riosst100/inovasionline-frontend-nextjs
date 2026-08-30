@@ -2,20 +2,23 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useIsRestoring } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { AdminTopbar } from "@/components/admin/admin-topbar";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useCurrentUser } from "@/features/auth/use-auth";
 
 export default function AdminProtectedLayout({ children }: { children: React.ReactNode }) {
+  const isRestoring = useIsRestoring();
   const { data: user, isLoading } = useCurrentUser();
   const router = useRouter();
 
+  const isChecking = isRestoring || isLoading;
   const isAuthorized = user?.role === "platform_admin";
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isChecking) return;
 
     if (!user) {
       router.replace("/admin/login");
@@ -25,15 +28,13 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
     if (!isAuthorized) {
       router.replace("/");
     }
-  }, [isLoading, user, isAuthorized, router]);
+  }, [isChecking, user, isAuthorized, router]);
 
-  if (isLoading || !isAuthorized) {
+  if (isChecking || !isAuthorized) {
     return (
-      <div className="flex min-h-screen items-center justify-center p-6">
-        <div className="w-full max-w-sm space-y-4">
-          <Skeleton className="h-8 w-full" />
-          <Skeleton className="h-32 w-full" />
-        </div>
+      <div className="flex min-h-screen flex-col items-center justify-center gap-3 p-6">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-sm text-muted-foreground">Loading...</p>
       </div>
     );
   }

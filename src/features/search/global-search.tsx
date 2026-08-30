@@ -27,9 +27,9 @@ export function GlobalSearch() {
   }
 
   return (
-    <div ref={containerRef} className="relative mx-auto mt-8 max-w-xl">
-      <div className="flex items-center gap-2 rounded-full border border-border bg-card p-1.5 shadow-lg shadow-black/10">
-        <Search className="ml-3 h-4 w-4 shrink-0 text-muted-foreground" />
+    <div ref={containerRef} className="relative mx-auto mt-6 max-w-xl sm:mt-8">
+      <div className="flex items-center gap-1.5 rounded-full border border-border bg-card p-1.5 shadow-lg shadow-black/10 sm:gap-2">
+        <Search className="ml-2.5 h-4 w-4 shrink-0 text-muted-foreground sm:ml-3" />
         <Input
           value={query}
           onChange={(e) => {
@@ -42,9 +42,12 @@ export function GlobalSearch() {
             if (e.key === "Enter") submitSearch(query);
           }}
           placeholder="Cari makanan, resto, atau kategori..."
-          className="border-0 bg-transparent shadow-none focus-visible:ring-0"
+          className="h-11 border-0 bg-transparent text-base shadow-none focus-visible:ring-0 sm:h-9 sm:text-sm"
         />
-        <Button className="rounded-full px-6" onClick={() => submitSearch(query)}>
+        <Button
+          className="h-11 shrink-0 rounded-full px-4 sm:h-9 sm:px-6"
+          onClick={() => submitSearch(query)}
+        >
           Cari
         </Button>
       </div>
@@ -57,7 +60,7 @@ export function GlobalSearch() {
               type="button"
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => submitSearch(suggestion)}
-              className="flex w-full items-center gap-2.5 px-4 py-2 text-sm text-foreground hover:bg-surface"
+              className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-foreground hover:bg-surface"
             >
               <Search className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
               <span className="truncate">{suggestion}</span>

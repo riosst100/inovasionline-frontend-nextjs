@@ -68,9 +68,9 @@ export default function AdminSellersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight">Seller Applications</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Seller</h1>
         <p className="text-sm text-muted-foreground">
-          Tinjau dan kelola pengajuan calon seller di platform.
+          Kelola seller di platform dan tinjau pengajuan yang belum disetujui.
         </p>
       </div>
 

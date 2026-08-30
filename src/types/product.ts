@@ -84,7 +84,17 @@ export interface Category {
   parent_id: string | null;
   name: string;
   slug: string;
+  description: string | null;
   icon: string | null;
+  is_active: boolean;
+  created_by: string | null;
+}
+
+export interface CategoryPayload {
+  parent_id?: string | null;
+  name: string;
+  description?: string;
+  icon?: string;
 }
 
 export interface PublicProduct {
@@ -105,6 +115,11 @@ export interface PublicProductCategory {
   id: string;
   name: string;
   slug: string;
+}
+
+export interface CategoryWithProducts {
+  category: Category;
+  products: PublicProduct[];
 }
 
 export interface PublicProductStore {
