@@ -2,7 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowLeft, BadgeCheck, Image, LayoutDashboard, Layers, ShieldCheck, Store, Users, Zap } from "lucide-react";
+import {
+  ArrowLeft,
+  BadgeCheck,
+  FileSpreadsheet,
+  Image,
+  LayoutDashboard,
+  Layers,
+  ShieldCheck,
+  ShoppingCart,
+  Store,
+  Truck,
+  Users,
+  Wallet,
+  Zap,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +38,10 @@ const MENU = [
   { href: "/admin/categories", label: "Kategori", icon: Layers },
   { href: "/admin/flash-sale-slots", label: "Flash Sale Slots", icon: Zap },
   { href: "/admin/banners", label: "Banner", icon: Image },
+  { href: "/admin/orders", label: "Pesanan", icon: ShoppingCart },
+  { href: "/admin/payment-methods", label: "Metode Pembayaran", icon: Wallet },
+  { href: "/admin/shipping-methods", label: "Metode Pengiriman", icon: Truck },
+  { href: "/admin/shipping-rate-templates", label: "Template Tarif Pengiriman", icon: FileSpreadsheet },
 ];
 
 export function AdminSidebar() {

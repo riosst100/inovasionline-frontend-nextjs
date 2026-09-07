@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -44,6 +44,29 @@ export function ProductEditForm({ productId }: { productId: string }) {
   const { data: categories } = useCategories();
   const updateProduct = useUpdateProduct(productId);
 
+  const formValues = useMemo<ProductFormValues | undefined>(() => {
+    if (!product) return undefined;
+
+    return {
+      category_id: product.category_id ?? undefined,
+      name: product.name,
+      short_description: product.short_description ?? "",
+      description: product.description ?? "",
+      product_type: product.product_type,
+      regular_price: Number(product.regular_price),
+      sale_price: product.sale_price ? Number(product.sale_price) : undefined,
+      sku: product.sku ?? "",
+      stock: product.stock,
+      track_inventory: product.track_inventory,
+      requires_shipping: product.requires_shipping,
+      status: product.status,
+      images: [],
+      existing_images: [...product.images]
+        .sort((a, b) => a.sort_order - b.sort_order)
+        .map((image) => image.id),
+    };
+  }, [product]);
+
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -58,28 +81,10 @@ export function ProductEditForm({ productId }: { productId: string }) {
       requires_shipping: true,
       status: "draft",
       images: [],
+      existing_images: [],
     },
+    values: formValues,
   });
-
-  useEffect(() => {
-    if (!product) return;
-
-    form.reset({
-      category_id: product.category_id ?? undefined,
-      name: product.name,
-      short_description: product.short_description ?? "",
-      description: product.description ?? "",
-      product_type: product.product_type,
-      regular_price: Number(product.regular_price),
-      sale_price: product.sale_price ? Number(product.sale_price) : undefined,
-      sku: product.sku ?? "",
-      stock: product.stock,
-      track_inventory: product.track_inventory,
-      requires_shipping: product.requires_shipping,
-      status: product.status,
-      images: [],
-    });
-  }, [product, form]);
 
   function onSubmit(values: ProductFormValues) {
     updateProduct.mutate(values, {
@@ -126,18 +131,26 @@ export function ProductEditForm({ productId }: { productId: string }) {
           <h2 className="text-base font-semibold">Foto Produk</h2>
           <FormField
             control={form.control}
-            name="images"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <ProductImageInput
-                    value={field.value ?? []}
-                    onChange={field.onChange}
-                    existingImageUrls={product.images.map((image) => image.url)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            name="existing_images"
+            render={({ field: existingImagesField }) => (
+              <FormField
+                control={form.control}
+                name="images"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <ProductImageInput
+                        value={field.value ?? []}
+                        onChange={field.onChange}
+                        existingImages={product.images.map((image) => ({ id: image.id, url: image.url }))}
+                        existingImageOrder={existingImagesField.value ?? []}
+                        onExistingImageOrderChange={existingImagesField.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             )}
           />
         </section>
@@ -350,7 +363,7 @@ export function ProductEditForm({ productId }: { productId: string }) {
             render={({ field }) => (
               <FormItem className="sm:max-w-xs">
                 <FormLabel>Status Produk</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select key={field.value} onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih status" />
@@ -360,6 +373,8 @@ export function ProductEditForm({ productId }: { productId: string }) {
                     <SelectItem value="draft">Draf</SelectItem>
                     <SelectItem value="active">Aktif</SelectItem>
                     <SelectItem value="inactive">Nonaktif</SelectItem>
+                    <SelectItem value="out_of_stock">Stok Habis</SelectItem>
+                    <SelectItem value="archived">Diarsipkan</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

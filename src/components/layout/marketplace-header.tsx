@@ -17,6 +17,7 @@ import {
   LayoutDashboard,
   Settings,
 } from "lucide-react";
+import { BrandMark } from "@/components/icons/brand-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -56,9 +57,7 @@ export function MarketplaceHeader() {
       {/* Desktop top row */}
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shadow-primary/30">
-            <Store className="h-4.5 w-4.5" />
-          </div>
+          <BrandMark className="h-11 w-11" />
           <span className="hidden text-lg font-bold tracking-tight sm:block">Inovasi Online</span>
         </Link>
 

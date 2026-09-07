@@ -1,7 +1,10 @@
 import { apiDelete, apiGet, apiGetPaginated, apiPost, apiPut } from "@/services/api-client";
 import type {
   AdminCategoryListParams,
+  AdminOrderListParams,
+  AdminPaymentMethodListParams,
   AdminSellerApplicationListParams,
+  AdminShippingMethodListParams,
   AdminUserListParams,
   AdminVerificationListParams,
   PaginatedResult,
@@ -9,7 +12,10 @@ import type {
 import type { SellerApplication, User, UserVerification } from "@/types/auth";
 import type { Banner, BannerPayload } from "@/types/banner";
 import type { FlashSaleSlot, FlashSaleSlotPayload } from "@/types/flash-sale-slot";
+import type { Order } from "@/types/order";
+import type { PaymentMethod } from "@/types/payment-method";
 import type { Category, CategoryPayload } from "@/types/product";
+import type { ShippingMethod } from "@/types/shipping-method";
 
 function toBannerFormData(payload: BannerPayload): FormData {
   const formData = new FormData();
@@ -85,6 +91,20 @@ export const adminService = {
   reorderBanners: (ids: string[]) => apiPost<null>("/admin/banners/reorder", { ids }),
 
   deleteBanner: (id: string) => apiDelete<null>(`/admin/banners/${id}`),
+
+  listOrders: (params: AdminOrderListParams = {}) => apiGetPaginated<Order>("/admin/orders", { params }),
+
+  getOrder: (id: string) => apiGet<Order>(`/admin/orders/${id}`),
+
+  listPaymentMethods: (params: AdminPaymentMethodListParams = {}) =>
+    apiGetPaginated<PaymentMethod>("/admin/payment-methods", { params }),
+
+  togglePaymentMethod: (id: string) => apiPost<PaymentMethod>(`/admin/payment-methods/${id}/toggle`),
+
+  listShippingMethods: (params: AdminShippingMethodListParams = {}) =>
+    apiGetPaginated<ShippingMethod>("/admin/shipping-methods", { params }),
+
+  toggleShippingMethod: (id: string) => apiPost<ShippingMethod>(`/admin/shipping-methods/${id}/toggle`),
 };
 
 export type { PaginatedResult };

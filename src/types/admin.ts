@@ -31,3 +31,22 @@ export interface AdminCategoryListParams {
   status?: string;
   per_page?: number;
 }
+
+export interface AdminOrderListParams {
+  page?: number;
+  store_id?: string;
+  status?: string;
+  payment_status?: string;
+}
+
+export interface AdminPaymentMethodListParams {
+  page?: number;
+  store_id?: string;
+  is_enabled?: boolean;
+}
+
+export interface AdminShippingMethodListParams {
+  page?: number;
+  store_id?: string;
+  is_enabled?: boolean;
+}

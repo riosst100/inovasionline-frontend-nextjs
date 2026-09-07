@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Store } from "lucide-react";
+import { BrandMark } from "@/components/icons/brand-mark";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -10,9 +10,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
       <div className="relative z-10 w-full max-w-md">
         <Link href="/" className="mb-8 flex items-center justify-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/30">
-            <Store className="h-5 w-5" />
-          </div>
+          <BrandMark className="h-12 w-12" />
           <span className="text-xl font-bold tracking-tight">Inovasi Online</span>
         </Link>
 

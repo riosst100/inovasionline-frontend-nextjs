@@ -77,6 +77,12 @@ export interface ProductPayload {
   meta_description?: string;
 
   images?: File[];
+  existing_images?: string[];
+}
+
+export interface ProductImportResult {
+  imported: number;
+  skipped: { row: number; reason: string }[];
 }
 
 export interface Category {

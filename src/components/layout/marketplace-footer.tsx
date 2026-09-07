@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Store } from "lucide-react";
 import { Facebook, Instagram, Twitter } from "@/components/icons/social";
+import { BrandMark } from "@/components/icons/brand-mark";
 
 const FOOTER_LINKS = [
   {
@@ -35,9 +35,7 @@ export function MarketplaceFooter() {
         <div className="grid gap-10 md:grid-cols-[1.5fr_repeat(3,1fr)]">
           <div>
             <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                <Store className="h-4.5 w-4.5" />
-              </div>
+              <BrandMark className="h-11 w-11" />
               <span className="text-lg font-bold tracking-tight">Inovasi Online</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">

@@ -19,8 +19,7 @@ export function CategoryList() {
     staleTime: 5 * 60 * 1000,
   });
 
-  const mainCategory = allCategories?.find((category) => category.parent_id === null);
-  const categories = allCategories?.filter((category) => category.parent_id === mainCategory?.id);
+  const categories = allCategories?.filter((category) => category.parent_id === null);
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;

@@ -52,3 +52,14 @@ export function useUpdateProduct(id: string) {
     },
   });
 }
+
+export function useImportProducts() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: productService.import,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: PRODUCTS_QUERY_KEY });
+    },
+  });
+}
