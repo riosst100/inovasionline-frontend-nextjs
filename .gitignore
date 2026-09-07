@@ -34,6 +34,10 @@ yarn-error.log*
 .env*
 !.env.example
 
+# release metadata (written by release-apk.bat, not source)
+public/downloads/release.json
+public/downloads/*.apk
+
 # vercel
 .vercel
 

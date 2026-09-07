@@ -39,6 +39,7 @@ const NAV_LINKS = [
   { href: "/categories", label: "Kategori" },
   { href: "/stores", label: "Toko" },
   { href: "/promotions", label: "Promo" },
+  { href: "/download", label: "Download App" },
 ];
 
 export function MarketplaceHeader() {
