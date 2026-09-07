@@ -40,7 +40,12 @@ function formatDate(dateStr: string) {
       day: "numeric",
       month: "long",
       year: "numeric",
-    }).format(new Date(dateStr));
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Jakarta",
+    })
+      .format(new Date(dateStr))
+      .replace(/\./g, ":") + " WIB";
   } catch {
     return dateStr;
   }
