@@ -49,3 +49,20 @@ export const forgotPasswordSchema = z.object({
 });
 
 export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
+
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, "Password minimal 8 karakter")
+      .regex(/[a-z]/, "Password harus mengandung huruf kecil")
+      .regex(/[A-Z]/, "Password harus mengandung huruf besar")
+      .regex(/[0-9]/, "Password harus mengandung angka"),
+    password_confirmation: z.string().min(1, "Konfirmasi password wajib diisi"),
+  })
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Konfirmasi password tidak cocok",
+    path: ["password_confirmation"],
+  });
+
+export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
