@@ -1,0 +1,22 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.inovasionline.twa",
+      "sha256_cert_fingerprints": [
+        "45:C1:10:03:52:96:53:65:23:8F:E9:11:3C:7A:DB:4E:41:50:15:95:C6:12:34:76:27:02:C1:17:1F:DB:31:DD"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.inovasionline.twa.dev",
+      "sha256_cert_fingerprints": [
+        "45:C1:10:03:52:96:53:65:23:8F:E9:11:3C:7A:DB:4E:41:50:15:95:C6:12:34:76:27:02:C1:17:1F:DB:31:DD"
+      ]
+    }
+  }
+]

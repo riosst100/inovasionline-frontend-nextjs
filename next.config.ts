@@ -10,6 +10,19 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "api.inovasionline.com", pathname: "/storage/**", search: "" },
     ],
   },
+  async headers() {
+    return [
+      {
+        // No extension, so Apple/iOS fetches it without a file suffix.
+        source: "/.well-known/apple-app-site-association",
+        headers: [{ key: "Content-Type", value: "application/json" }],
+      },
+      {
+        source: "/.well-known/assetlinks.json",
+        headers: [{ key: "Content-Type", value: "application/json" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
